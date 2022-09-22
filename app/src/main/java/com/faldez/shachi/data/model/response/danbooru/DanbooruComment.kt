@@ -1,12 +1,13 @@
 package com.faldez.shachi.data.model.response.danbooru
 
 import com.faldez.shachi.data.util.serializer.JsonDateTimeSerializer
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 import java.time.ZonedDateTime
 
 @Serializable
-data class DanbooruComment(
+data class DanbooruComment @OptIn(ExperimentalSerializationApi::class) constructor(
     val id: Int = 0,
     @JsonNames("post_id") val postId: Int = 0,
     val body: String = "",

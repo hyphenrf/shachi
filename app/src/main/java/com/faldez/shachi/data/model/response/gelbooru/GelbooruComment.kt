@@ -3,6 +3,7 @@ package com.faldez.shachi.data.model.response
 import com.faldez.shachi.data.util.serializer.EmptyStringAsIntNullTypeSerializer
 import com.faldez.shachi.data.util.serializer.LocalDateTimeSerializer
 import com.faldez.shachi.data.util.serializer.SingleObjectAsArraySerializer
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 import java.time.LocalDateTime
@@ -19,7 +20,7 @@ data class GelbooruComments(
 )
 
 @Serializable
-data class GelbooruComment(
+data class GelbooruComment @OptIn(ExperimentalSerializationApi::class) constructor(
     val id: Int,
     @JsonNames("post_id") val postId: Int,
     val body: String,

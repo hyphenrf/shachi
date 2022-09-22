@@ -1,6 +1,7 @@
 package com.faldez.shachi.data.model.response
 
 import com.faldez.shachi.data.util.serializer.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 import java.time.ZonedDateTime
@@ -20,7 +21,7 @@ data class GelbooruPosts(
 )
 
 @Serializable
-data class GelbooruPost(
+data class GelbooruPost @OptIn(ExperimentalSerializationApi::class) constructor(
     val height: Int = 0,
     val width: Int = 0,
     @Serializable(EmptyStringAsIntNullTypeSerializer::class) val score: Int? = null,

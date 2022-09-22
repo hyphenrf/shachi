@@ -1,12 +1,13 @@
 package com.faldez.shachi.data.model.response.moebooru
 
 import com.faldez.shachi.data.util.serializer.TimestampDateTimeSerializer
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 import java.time.ZonedDateTime
 
 @Serializable
-data class MoebooruPost(
+data class MoebooruPost @OptIn(ExperimentalSerializationApi::class) constructor(
     val id: Int = 0,
     val tags: String = "",
     @Serializable(TimestampDateTimeSerializer::class) @JsonNames("created_at") val createdAt: ZonedDateTime? = null,
