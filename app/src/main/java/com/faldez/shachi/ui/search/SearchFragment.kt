@@ -311,7 +311,7 @@ class SearchFragment : Fragment() {
     private fun LinearLayoutCompat.show() {
         animate().alpha(1f)
             .setListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                     super.onAnimationEnd(animation)
                     visibility = View.VISIBLE
                 }
@@ -321,7 +321,7 @@ class SearchFragment : Fragment() {
     private fun LinearLayoutCompat.hide() {
         animate().alpha(0f)
             .setListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
                     visibility = View.GONE
                 }

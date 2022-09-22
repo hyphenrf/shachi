@@ -164,12 +164,12 @@ class MainActivity : AppCompatActivity(),
         animate()
             .translationY(height.toFloat())
             .setListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                     super.onAnimationStart(animation)
                     if (callback != null) callback()
                 }
 
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
                     visibility = View.GONE
                 }
@@ -187,12 +187,12 @@ class MainActivity : AppCompatActivity(),
         isShowNavigation = true
         animate().translationY(0f)
             .setListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                     super.onAnimationStart(animation)
                     visibility = View.VISIBLE
                 }
 
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
                     val constraint = binding.mainLayout
                     val constraintSet = ConstraintSet()
