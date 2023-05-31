@@ -38,6 +38,7 @@ class SearchSimpleViewModel(
         suggestionTags =
             actionStateFlow.filterIsInstance<UiAction.SearchTag>()
                 .distinctUntilChanged()
+                .debounce(250)
                 .flatMapLatest { searchTag(server?.toServer(), it.tag) }
                 .shareIn(scope = viewModelScope,
                     started = SharingStarted.WhileSubscribed(),
