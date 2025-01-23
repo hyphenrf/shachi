@@ -38,7 +38,7 @@ interface TagRepository {
             }
         }
         null -> {
-            db.tagDao().searchTag("${action.tag}%")?.mapToTagDetails()
+            db.tagDao().searchTag("${action.tag}%").mapToTagDetails()
         }
     }
 
@@ -69,12 +69,12 @@ interface TagRepository {
             db.tagDao().insertTag(it)
         }
 
-    suspend fun getTags(action: Action.GetTags): List<Tag>? {
+    suspend fun getTags(action: Action.GetTags): List<Tag> {
         Log.d("TagRepository/getTags", "tags ${action.tags}")
         /*
         Try to query from database first before make request
          */
-        val modifierPrefixRegex = Regex(modifierRegex)
+//        val modifierPrefixRegex = Regex(modifierRegex)
         val tagsToQuery = action.tags.trim().split(" ")
         val cachedTags = tagsToQuery.let { tags ->
             if (action.server != null) {
@@ -87,13 +87,13 @@ interface TagRepository {
         Log.d("TagRepository/getTags", "cachedTags $cachedTags")
 
         // filter tags from tagsToQuery that is not on database to query to server
-        val cachedTagsSet = cachedTags?.map { it.name }?.toSet()
+        val cachedTagsSet = cachedTags.map { it.name }.toSet()
         val uncachedTags = tagsToQuery.filter {
-            !(cachedTagsSet?.contains(it) ?: false)
+            !cachedTagsSet.contains(it)
         }
         Log.d("TagRepository/getTags", "uncachedTags $uncachedTags")
 
-        if (uncachedTags.isNullOrEmpty())
+        if (uncachedTags.isEmpty())
             return cachedTags
 
         // create new action which contains tags not found on database
@@ -146,7 +146,7 @@ interface TagRepository {
             }
 
         val result =
-            (listOf(cachedTags ?: listOf(), bulkQueriedTags ?: listOf(),
+            (listOf(cachedTags, bulkQueriedTags ?: listOf(),
                 eachQueriedTags).flatten() as List<*>).filterIsInstance<Tag>()
 
         Log.d("TagRepository/getTags", "result $result")
