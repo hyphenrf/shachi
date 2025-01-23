@@ -6,7 +6,7 @@
     app:startDestination="@id/moreFragment">
     <fragment
         android:id="@+id/moreFragment"
-        android:name="com.faldez.shachi.ui.more.MoreFragment"
+        android:name="com.hyphenrf.shachi.ui.more.MoreFragment"
         android:label="more_fragment"
         tools:layout="@layout/more_fragment">
 
@@ -27,17 +27,17 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.faldez.shachi.ui.settings.SettingsFragment"
+        android:name="com.hyphenrf.shachi.ui.settings.SettingsFragment"
         android:label="settings_fragment"
         tools:layout="@layout/settings_fragment" />
     <fragment
         android:id="@+id/ossFragment"
-        android:name="com.faldez.shachi.ui.oss.OssFragment"
+        android:name="com.hyphenrf.shachi.ui.oss.OssFragment"
         android:label="oss_fragment"
         tools:layout="@layout/oss_fragment" />
     <fragment
         android:id="@+id/aboutFragment"
-        android:name="com.faldez.shachi.ui.about.AboutFragment"
+        android:name="com.hyphenrf.shachi.ui.about.AboutFragment"
         android:label="about_fragment"
         tools:layout="@layout/about_fragment">
 

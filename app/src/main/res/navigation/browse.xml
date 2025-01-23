@@ -6,7 +6,7 @@
     app:startDestination="@id/browseFragment">
     <fragment
         android:id="@+id/browseFragment"
-        android:name="com.faldez.shachi.ui.browse.BrowseFragment"
+        android:name="com.hyphenrf.shachi.ui.browse.BrowseFragment"
         android:label="browse_fragment"
         tools:layout="@layout/browse_fragment">
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/browsePostSlideFragment"
-        android:name="com.faldez.shachi.ui.post_slide.PostSlideFragment"
+        android:name="com.hyphenrf.shachi.ui.post_slide.PostSlideFragment"
         android:label="post_slide_fragment"
         tools:layout="@layout/post_slide_fragment">
 
@@ -44,7 +44,7 @@
         app:popUpTo="@id/browseFragment" />
     <fragment
         android:id="@+id/search_fragment"
-        android:name="com.faldez.shachi.ui.search.SearchFragment"
+        android:name="com.hyphenrf.shachi.ui.search.SearchFragment"
         android:label="search_dialog"
         tools:layout="@layout/search_fragment" />
     <action
@@ -53,7 +53,7 @@
         app:popUpTo="@id/browseFragment" />
     <fragment
         android:id="@+id/post_detail_fragment"
-        android:name="com.faldez.shachi.ui.post_detail.PostDetailFragment"
+        android:name="com.hyphenrf.shachi.ui.post_detail.PostDetailFragment"
         android:label="post_detail"
         tools:layout="@layout/post_detail_fragment" />
 

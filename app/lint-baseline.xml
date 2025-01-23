@@ -36,7 +36,7 @@
         id="NotifyDataSetChanged"
         message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
         <location
-            file="src\main\java\com\faldez\shachi\ui\blacklisted_tag\BlacklistedTagAdapter.kt"
+            file="src\main\java\com\hyphenrf\shachi\ui\blacklisted_tag\BlacklistedTagAdapter.kt"
             line="18"/>
     </issue>
 
@@ -44,7 +44,7 @@
         id="NotifyDataSetChanged"
         message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
         <location
-            file="src\main\java\com\faldez\shachi\ui\search\SearchSuggestionAdapter.kt"
+            file="src\main\java\com\hyphenrf\shachi\ui\search\SearchSuggestionAdapter.kt"
             line="26"/>
     </issue>
 
@@ -52,7 +52,7 @@
         id="NotifyDataSetChanged"
         message="It will always be more efficient to use more specific change events if you can. Rely on `notifyDataSetChanged` as a last resort.">
         <location
-            file="src\main\java\com\faldez\shachi\ui\servers\ServerListAdapter.kt"
+            file="src\main\java\com\hyphenrf\shachi\ui\servers\ServerListAdapter.kt"
             line="17"/>
     </issue>
 
@@ -75,7 +75,7 @@
         id="UseSparseArrays"
         message="Use `new SparseIntArray(...)` instead for better performance">
         <location
-            file="src\main\java\com\faldez\shachi\ui\saved\SavedViewModel.kt"
+            file="src\main\java\com\hyphenrf\shachi\ui\saved\SavedViewModel.kt"
             line="33"/>
     </issue>
 
@@ -467,7 +467,7 @@
         id="SetTextI18n"
         message="Do not concatenate text displayed with `setText`. Use resource string with placeholders.">
         <location
-            file="src\main\java\com\faldez\shachi\ui\search\SearchSuggestionAdapter.kt"
+            file="src\main\java\com\hyphenrf\shachi\ui\search\SearchSuggestionAdapter.kt"
             line="48"/>
     </issue>
 

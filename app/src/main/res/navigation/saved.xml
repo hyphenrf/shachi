@@ -24,7 +24,7 @@
         app:popExitAnim="@anim/slide_out" />
     <fragment
         android:id="@+id/savedFragment"
-        android:name="com.faldez.shachi.ui.saved.SavedFragment"
+        android:name="com.hyphenrf.shachi.ui.saved.SavedFragment"
         android:label="saved_fragment"
         tools:layout="@layout/saved_fragment">
 
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/browseSavedFragment"
-        android:name="com.faldez.shachi.ui.browse.SavedBrowseFragment"
+        android:name="com.hyphenrf.shachi.ui.browse.SavedBrowseFragment"
         android:label="browse_fragment"
         tools:layout="@layout/browse_fragment">
 
@@ -57,12 +57,12 @@
     </fragment>
     <fragment
         android:id="@+id/browseSavedPostSlideFragment"
-        android:name="com.faldez.shachi.ui.post_slide.BrowseSavedPostSlideFragment"
+        android:name="com.hyphenrf.shachi.ui.post_slide.BrowseSavedPostSlideFragment"
         android:label="post_slide_fragment"
         tools:layout="@layout/post_slide_fragment" />
     <fragment
         android:id="@+id/savedPostSlideFragment"
-        android:name="com.faldez.shachi.ui.post_slide.SavedPostSlideFragment"
+        android:name="com.hyphenrf.shachi.ui.post_slide.SavedPostSlideFragment"
         android:label="post_slide_fragment"
         tools:layout="@layout/post_slide_fragment" />
     <action
@@ -71,12 +71,12 @@
         app:popUpTo="@id/browseSavedFragment" />
     <fragment
         android:id="@+id/search_fragment"
-        android:name="com.faldez.shachi.ui.search.SearchFragment"
+        android:name="com.hyphenrf.shachi.ui.search.SearchFragment"
         android:label="search_dialog"
         tools:layout="@layout/search_fragment" />
     <fragment
         android:id="@+id/post_detail_fragment"
-        android:name="com.faldez.shachi.ui.post_detail.PostDetailFragment"
+        android:name="com.hyphenrf.shachi.ui.post_detail.PostDetailFragment"
         android:label="post_detail"
         tools:layout="@layout/post_detail_fragment" />
 </navigation>

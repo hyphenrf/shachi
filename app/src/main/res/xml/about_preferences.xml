@@ -9,7 +9,7 @@
         app:icon="@drawable/ic_github"
         app:title="@string/github" />
     <Preference
-        app:fragment="com.faldez.shachi.ui.oss.OssFragment"
+        app:fragment="com.hyphenrf.shachi.ui.oss.OssFragment"
         app:key="oss_notices"
         app:title="@string/open_source_notices" />
     <Preference

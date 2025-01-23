@@ -27,12 +27,12 @@
     <include app:graph="@navigation/more" />
     <dialog
         android:id="@+id/server_dialog_fragment"
-        android:name="com.faldez.shachi.ui.server_dialog.ServerDialogFragment"
+        android:name="com.hyphenrf.shachi.ui.server_dialog.ServerDialogFragment"
         android:label="server_dialog"
         tools:layout="@layout/server_dialog_fragment" />
     <fragment
         android:id="@+id/serversFragment"
-        android:name="com.faldez.shachi.ui.servers.ServersFragment"
+        android:name="com.hyphenrf.shachi.ui.servers.ServersFragment"
         android:label="servers_fragment"
         tools:layout="@layout/servers_fragment">
         <action
@@ -45,12 +45,12 @@
     </fragment>
     <fragment
         android:id="@+id/server_edit_fragment"
-        android:name="com.faldez.shachi.ui.server_edit.ServerEditFragment"
+        android:name="com.hyphenrf.shachi.ui.server_edit.ServerEditFragment"
         android:label="server_edit_fragment"
         tools:layout="@layout/server_edit_fragment" />
     <fragment
         android:id="@+id/blacklisted_tags_fragment"
-        android:name="com.faldez.shachi.ui.blacklisted_tag.BlacklistedTagFragment"
+        android:name="com.hyphenrf.shachi.ui.blacklisted_tag.BlacklistedTagFragment"
         android:label="blacklisted_tags_fragment"
         tools:layout="@layout/blacklisted_tag_fragment" />
 </navigation>

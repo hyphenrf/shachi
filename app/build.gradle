@@ -15,7 +15,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.faldez.shachi"
+        applicationId "com.hyphenrf.shachi"
         minSdk 26
         targetSdk 33
         versionCode 16
@@ -59,7 +59,7 @@ android {
     lint {
         baseline file('lint-baseline.xml')
     }
-    namespace 'com.faldez.shachi'
+    namespace 'com.hyphenrf.shachi'
 }
 
 aboutLibraries {
