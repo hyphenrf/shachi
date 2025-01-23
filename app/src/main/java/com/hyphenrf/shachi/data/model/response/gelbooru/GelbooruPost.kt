@@ -41,7 +41,7 @@ data class GelbooruPost @OptIn(ExperimentalSerializationApi::class) constructor(
     @JsonNames("preview_height") val previewHeight: Int? = null,
     val rating: String = "",
     val tags: String = "",
-    val id: Int = 0,
+    @Serializable(SafeIntIdSerializer::class) val id: Int = 0,
     val change: Int = 0,
     val md5: String = "",
     @JsonNames("creator_id") val creatorId: Int? = null,

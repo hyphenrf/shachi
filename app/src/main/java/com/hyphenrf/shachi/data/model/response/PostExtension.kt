@@ -12,8 +12,9 @@ import java.time.format.FormatStyle
 
 @JvmName("gelbooruMapToPost")
 fun List<GelbooruPost>.mapToPost(server: Server): List<Post> {
-    return this.map { post ->
-        Post(
+    return this.mapNotNull { post ->
+        if (post.id == -1) null
+        else Post(
             height = post.height,
             width = post.width,
             score = post.score,
@@ -114,7 +115,7 @@ fun List<MoebooruPost>.mapToPost(server: Server): List<Post> {
 }
 
 fun GelbooruPostResponse.mapToPost(server: Server): List<Post>? {
-    return this.posts?.post?.map { post ->
+    return this.posts?.post?.mapToPost(server) /* { post ->
         Post(
             height = post.height,
             width = post.width,
@@ -142,7 +143,7 @@ fun GelbooruPostResponse.mapToPost(server: Server): List<Post>? {
             hasComments = post.hasComments,
             postUrl = server.getPostUrl(post.id)
         )
-    }
+    } */
 }
 
 fun parseRating(rating: String): Rating =
