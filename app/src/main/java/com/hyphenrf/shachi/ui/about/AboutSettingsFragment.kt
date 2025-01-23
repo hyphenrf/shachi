@@ -24,13 +24,5 @@ class AboutSettingsFragment : PreferenceFragmentCompat() {
             startActivity(intent)
             true
         }
-
-        findPreference<Preference>(ShachiPreference.KEY_PRIVACY_POLICY)?.setOnPreferenceClickListener {
-            val intent =
-                Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://raw.githubusercontent.com/hyphenrf/shachi/master/PRIVACY.md"))
-            startActivity(intent)
-            true
-        }
     }
 }

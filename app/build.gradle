@@ -8,8 +8,8 @@ plugins {
 
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.mikepenz.aboutlibraries.plugin'
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
+// apply plugin: 'com.google.gms.google-services'
+// apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdk 33
@@ -98,8 +98,8 @@ dependencies {
     implementation "com.android.billingclient:billing-ktx:5.0.0"
 
     // firebase
-    implementation platform('com.google.firebase:firebase-bom:29.1.0')
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    // implementation platform('com.google.firebase:firebase-bom:29.1.0')
+    // implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
     // exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.18.1'

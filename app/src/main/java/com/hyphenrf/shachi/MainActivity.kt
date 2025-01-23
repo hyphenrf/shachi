@@ -27,8 +27,8 @@ import com.hyphenrf.shachi.data.preference.ShachiPreference
 import com.hyphenrf.shachi.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigationrail.NavigationRailView
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
+// import com.google.firebase.crashlytics.ktx.crashlytics
+// import com.google.firebase.ktx.Firebase
 import com.google.modernstorage.permissions.RequestAccess
 import com.google.modernstorage.permissions.StoragePermissions
 
@@ -109,8 +109,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     fun setSendCrashReports() {
-        val isSend = sharedPreferences.getBoolean(ShachiPreference.KEY_SEND_CRASH_REPORTS, true)
-        Firebase.crashlytics.setCrashlyticsCollectionEnabled(isSend)
+        // val isSend = sharedPreferences.getBoolean(ShachiPreference.KEY_SEND_CRASH_REPORTS, true)
+        // Firebase.crashlytics.setCrashlyticsCollectionEnabled(isSend)
     }
 
     override fun onPreferenceStartFragment(
