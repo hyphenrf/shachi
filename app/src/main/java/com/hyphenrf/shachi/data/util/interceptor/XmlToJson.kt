@@ -8,21 +8,25 @@ import okhttp3.ResponseBody
 import org.json.jsonjava.XML
 
 
+// This interceptor is only ever used for XML API responses, non-xml responses are errors, and
+// should not silently pass through.
 class XmlToJsonInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
         var body = response.body
-        if (body?.contentType()?.subtype == "xml") {
+        val converted = if (body?.contentType()?.subtype == "xml") {
             val json = XML.toJSONObject(body.string())
             Log.d("TransformInterceptor", json.toString())
-            body = ResponseBody.create("application/json".toMediaTypeOrNull(), json.toString())
-            val builder = response.newBuilder()
-            return builder.header("Content-Type", "application/json").headers(response.headers)
-                .body(body).build()
+            json.toString()
+        } else {
+            val str = body?.string() ?: "No Response"
+            Log.e("TransformInterceptor", "NOT XML: $str")
+            """{"error": "$str"}"""
         }
-
-        Log.d("TransformInterceptor", "pass trough")
-        return response
+        body = ResponseBody.create("application/json".toMediaTypeOrNull(), converted)
+        val builder = response.newBuilder()
+        return builder.header("Content-Type", "application/json").headers(response.headers)
+            .body(body).build()
     }
 
 }

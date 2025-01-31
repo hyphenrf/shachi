@@ -11,6 +11,7 @@ import java.time.LocalDateTime
 @Serializable
 data class GelbooruCommentResponse(
     val comments: GelbooruComments? = null,
+    // val error: String? = null, // TODO: is it a good idea to propagate API response/error to user?
 )
 
 @Serializable
