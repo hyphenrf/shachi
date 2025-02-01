@@ -6,7 +6,7 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.JsonTransformingSerializer
 import kotlinx.serialization.json.intOrNull
 
-object SafeIntIdSerializer : JsonTransformingSerializer<Long>(Long.serializer()) {
+object SafeIntIdSerializer : JsonTransformingSerializer<Int>(Int.serializer()) {
     override fun transformDeserialize(element: JsonElement): JsonElement {
         require(element is JsonPrimitive)
         return JsonPrimitive(element.intOrNull ?: -1)
