@@ -17,6 +17,7 @@ fun List<GelbooruPost>.mapToPost(server: Server): List<Post> {
         else Post(
             height = post.height,
             width = post.width,
+            title = post.title,
             score = post.score,
             fileUrl = post.fileUrl,
             parentId = post.parentId,

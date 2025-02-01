@@ -28,6 +28,7 @@ data class Post(
     val height: Int,
     val width: Int,
     val score: Int?,
+    val title: String? = null,
     @ColumnInfo(name = "file_url") val fileUrl: String,
     @ColumnInfo(name = "parent_id") val parentId: Int?,
     @ColumnInfo(name = "sample_url") val sampleUrl: String?,

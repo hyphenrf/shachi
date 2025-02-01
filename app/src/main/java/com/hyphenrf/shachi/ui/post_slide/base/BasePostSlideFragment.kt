@@ -125,11 +125,11 @@ abstract class BasePostSlideFragment : Fragment() {
     open fun onPageChange(position: Int) {}
 
     private fun setAppBar(position: Int) {
-        postSlideAdapter.getPostItem(position)?.let {
-            binding.postSlideTopappbar.title =
-                postSlideAdapter.getPostItem(position)?.postId.toString()
-            setFavoriteButton(it)
-        }
+        val post = postSlideAdapter.getPostItem(position) ?: return
+        // From user POV it doesn't matter if title is empty or absent from server response
+        binding.postSlideTopappbar.title =
+            if (post.title.isNullOrBlank()) post.postId.toString() else post.title
+        setFavoriteButton(post)
     }
 
     private fun onPhotoTap() {
