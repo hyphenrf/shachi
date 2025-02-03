@@ -1,4 +1,4 @@
-# ⚠️ NOTICE ⚠️ (written by @hyphenrf (Hi o/))
+### ⚠️ IMPORTANT ⚠️ — @hyphenrf (Hi o/)
 
 This project did **NOT** start as original work of mine. It is forked from a now deleted
 [repository](https://github.com/faldez/shachi).
@@ -8,8 +8,6 @@ commits is at `faldez.dev`, a domain which isn't even parked. I couldn't get the
 insights) for this fork. This is also the only fork I'm aware of.
 
 More details at the end.
-
-----
 
 # Shachi
 
@@ -38,7 +36,7 @@ Supported booru engines:
 
 ----
 
-# More details (Hi again o/)
+### More details (Hi again o/)
 
 This is just an app that I found fits well with my needs, and didn't want it to rot and disappear.
 
