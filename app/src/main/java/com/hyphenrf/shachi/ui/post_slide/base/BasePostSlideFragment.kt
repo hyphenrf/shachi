@@ -38,7 +38,7 @@ import com.hyphenrf.shachi.ui.comment.CommentFragment
 import com.hyphenrf.shachi.ui.post_detail.PostDetailFragment
 import com.hyphenrf.shachi.ui.post_slide.PostSlideAdapter
 import com.hyphenrf.shachi.data.util.MimeUtil
-import com.hyphenrf.shachi.data.util.glide.GlideApp
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -144,7 +144,7 @@ abstract class BasePostSlideFragment : Fragment() {
             windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
 
             val value = TypedValue()
-            context?.theme?.resolveAttribute(R.attr.colorSurface, value, true)
+            context?.theme?.resolveAttribute(com.google.android.material.R.attr.colorSurface, value, true)
             binding.postSlideLayout.setBackgroundColor(value.data)
             false
         } else {
@@ -374,7 +374,7 @@ abstract class BasePostSlideFragment : Fragment() {
     abstract fun favoritePost(post: Post)
 
     private fun shareImage(mime: String, post: Post) {
-        GlideApp.with(requireContext()).asBitmap().load(post.fileUrl)
+        Glide.with(requireContext()).asBitmap().load(post.fileUrl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(

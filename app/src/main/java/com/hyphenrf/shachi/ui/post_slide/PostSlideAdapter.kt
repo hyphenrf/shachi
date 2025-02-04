@@ -25,7 +25,7 @@ import com.hyphenrf.shachi.data.preference.Quality
 import com.hyphenrf.shachi.databinding.PostSlideItemBinding
 import com.hyphenrf.shachi.databinding.PostSlideItemVideoBinding
 import com.hyphenrf.shachi.data.util.MimeUtil
-import com.hyphenrf.shachi.data.util.glide.GlideApp
+import com.bumptech.glide.Glide
 import com.hyphenrf.shachi.data.util.glide.GlideModule
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
@@ -113,7 +113,7 @@ class PostSlideAdapter(
     override fun onViewRecycled(holder: PostSlideViewHolder) {
         super.onViewRecycled(holder)
         if (holder is PostSlideImageViewHolder) {
-            GlideApp.with(holder.binding.root.context)
+            Glide.with(holder.binding.root.context)
                 .clear(holder.binding.postImageView)
         }
     }
@@ -176,8 +176,8 @@ class PostSlideImageViewHolder(
                     binding.postLoadingIndicator.isIndeterminate = false
                 })
 
-            var glide = GlideApp.with(binding.root.context).load(url)
-                .thumbnail(GlideApp.with(binding.root.context).load(item.previewUrl))
+            var glide = Glide.with(binding.root.context).load(url)
+                .thumbnail(Glide.with(binding.root.context).load(item.previewUrl))
                 .timeout(3000)
                 .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
@@ -208,7 +208,7 @@ class PostSlideImageViewHolder(
             }
             glide.into(postImageView)
         } else {
-            GlideApp.with(binding.root.context).load(BitmapDrawable(postImageView.resources,
+            Glide.with(binding.root.context).load(BitmapDrawable(postImageView.resources,
                 Bitmap.createBitmap(150,
                     150,
                     Bitmap.Config.ARGB_8888))).into(postImageView)

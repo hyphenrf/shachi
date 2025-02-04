@@ -29,7 +29,7 @@ interface GelbooruApi {
 
         private val retrofitApi: GelbooruApi by lazy {
             val client =
-                OkHttpClient().newBuilder().addInterceptor(XmlToJsonInterceptor())
+                OkHttpClient().newBuilder().addInterceptor(XmlToJsonInterceptor)
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .writeTimeout(120, TimeUnit.SECONDS)
                     .readTimeout(60, TimeUnit.SECONDS).build()

@@ -9,5 +9,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Shachi"
 include ':app'
-include ':json'
-project(':json').projectDir = new File(rootDir, 'json/')

@@ -78,9 +78,9 @@ class ServerEditFragment : Fragment() {
         binding = ServerEditFragmentBinding.inflate(inflater, container, false)
 
         ArrayAdapter(requireContext(),
-            R.layout.support_simple_spinner_dropdown_item,
+            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
             ServerType.values()).also { adapter ->
-            adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
+            adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item)
             binding.serverTypeSpinner.adapter = adapter
         }
 
