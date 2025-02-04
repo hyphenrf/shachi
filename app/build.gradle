@@ -1,3 +1,5 @@
+import static com.mikepenz.aboutlibraries.plugin.StrictMode.*
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -14,54 +16,43 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.hyphenrf.shachi"
+        applicationId 'com.hyphenrf.shachi'
         minSdk 26
         targetSdk 33
         versionCode 16
-        versionName "0.2.9"
+        versionName '0.2.9'
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
         ksp.arg 'room.schemaLocation', "$projectDir/schemas"
     }
 
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    buildTypes.release {
+        minifyEnabled true
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-    }
-    buildFeatures {
-        viewBinding = true
-    }
-    testOptions {
-        unitTests
-        unitTests {
-            returnDefaultValues = true
-        }
-    }
-    lint {
-        baseline file('lint-baseline.xml')
-    }
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+
+    buildFeatures.viewBinding = true
+    testOptions.unitTests.returnDefaultValues = true
+
+    lint.baseline file('lint-baseline.xml')
+
     namespace 'com.hyphenrf.shachi'
 }
 
 aboutLibraries {
-    configPath = "./config"
-    strictMode = com.mikepenz.aboutlibraries.plugin.StrictMode.FAIL
+    strictMode = FAIL
     allowedLicenses = ['Apache-2.0', 'MIT', 'BSD-2-Clause', 'The BSD 2-Clause License']
 }
 
 dependencies {
-
+    // General app dependencies
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.8.0-alpha01'
@@ -76,48 +67,51 @@ dependencies {
     implementation 'androidx.palette:palette-ktx:1.0.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
+
+    // Testing
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+
+    // Android testing and debugging
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-    androidTestImplementation "androidx.navigation:navigation-testing:2.5.2"
-    debugImplementation "androidx.fragment:fragment-testing:1.5.3"
-    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
-    implementation("androidx.recyclerview:recyclerview:1.2.1")
-    implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-
+    androidTestImplementation 'androidx.navigation:navigation-testing:2.5.2'
+    debugImplementation 'androidx.fragment:fragment-testing:1.5.3'
 
     // exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
 
     // room
-    implementation("androidx.room:room-runtime:2.4.3")
-    annotationProcessor("androidx.room:room-compiler:2.4.3")
-    kapt("androidx.room:room-compiler:2.4.3")
-    implementation("androidx.room:room-ktx:2.4.3")
-    implementation("androidx.room:room-paging:2.4.3")
+    implementation 'androidx.room:room-ktx:2.4.3'
+    implementation 'androidx.room:room-paging:2.4.3'
+    implementation 'androidx.room:room-runtime:2.4.3'
+    annotationProcessor 'androidx.room:room-compiler:2.4.3'
+    ksp 'androidx.room:room-compiler:2.4.3'
 
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
 
     // okhttp
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.3"))
-    implementation("com.squareup.okhttp3:okhttp")
+    implementation platform('com.squareup.okhttp3:okhttp-bom:4.9.3')
+    implementation 'com.squareup.okhttp3:okhttp'
 
     // Mockito
     testImplementation 'org.mockito:mockito-core:4.3.1'
     testImplementation 'org.mockito:mockito-inline:4.3.1'
 
     // Kotlinx coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1")
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1'
 
     // kotlinx serialization
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.3.2"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-protobuf:1.3.2'
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
 
     // XML to JSON conversion
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.2'
@@ -135,6 +129,6 @@ dependencies {
     implementation 'com.mikepenz:aboutlibraries:10.0.0-rc01'
 
     // modernstorage
-    implementation("com.google.modernstorage:modernstorage-permissions:1.0.0-alpha06")
-    implementation("com.google.modernstorage:modernstorage-storage:1.0.0-alpha06")
+    implementation 'com.google.modernstorage:modernstorage-permissions:1.0.0-alpha06'
+    implementation 'com.google.modernstorage:modernstorage-storage:1.0.0-alpha06'
 }
