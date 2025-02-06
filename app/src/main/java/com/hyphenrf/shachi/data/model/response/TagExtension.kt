@@ -4,11 +4,12 @@ import com.hyphenrf.shachi.data.model.Category
 import com.hyphenrf.shachi.data.model.Tag
 import com.hyphenrf.shachi.data.model.TagDetail
 import com.hyphenrf.shachi.data.model.response.danbooru.DanbooruTag
+import com.hyphenrf.shachi.data.model.response.gelbooru.GelbooruTag
 import com.hyphenrf.shachi.data.model.response.moebooru.MoebooruTag
 
-
-fun GelbooruTagResponse.mapToTagDetails() =
-    this.tags?.tag?.map {
+@JvmName("gelbooruMapToTagDetails")
+fun List<GelbooruTag>.mapToTagDetails() =
+    this.map {
         TagDetail(
             name = it.name,
             count = it.count,
@@ -16,8 +17,9 @@ fun GelbooruTagResponse.mapToTagDetails() =
         )
     }
 
-fun GelbooruTagResponse.mapToTags(serverId: Int) =
-    this.tags?.tag?.map {
+@JvmName("gelbooruMapToTags")
+fun List<GelbooruTag>.mapToTags(serverId: Int) =
+    this.map {
         Tag(
             name = it.name,
             type = parseTag(it.type),
@@ -25,17 +27,9 @@ fun GelbooruTagResponse.mapToTags(serverId: Int) =
         )
     }
 
-fun GelbooruTagResponse.mapToTagDetail() =
-    this.tags?.tag?.firstOrNull()?.let {
-        TagDetail(
-            name = it.name,
-            count = it.count,
-            type = parseTag(it.type)
-        )
-    }
-
-fun GelbooruTagResponse.mapToTag(serverId: Int) =
-    this.tags?.tag?.firstOrNull()?.let {
+@JvmName("gelbooruMapToTag")
+fun List<GelbooruTag>.mapToTag(serverId: Int) =
+    this.firstOrNull()?.let {
         Tag(
             name = it.name,
             type = parseTag(it.type),
@@ -63,16 +57,6 @@ fun List<DanbooruTag>.mapToTags(serverId: Int) =
         )
     }
 
-@JvmName("danbooruMapToTagDetail")
-fun List<DanbooruTag>.mapToTagDetail() =
-    this.firstOrNull()?.let {
-        TagDetail(
-            name = it.name,
-            count = it.postCount,
-            type = parseTag(it.category)
-        )
-    }
-
 @JvmName("danbooruMapToTag")
 fun List<DanbooruTag>.mapToTag(serverId: Int) =
     this.firstOrNull()?.let {
@@ -86,26 +70,6 @@ fun List<DanbooruTag>.mapToTag(serverId: Int) =
 @JvmName("moebooruMapToTagDetails")
 fun List<MoebooruTag>.mapToTagDetails() =
     this.map {
-        TagDetail(
-            name = it.name,
-            count = it.count,
-            type = parseTag(it.type)
-        )
-    }
-
-@JvmName("moebooruMapToTags")
-fun List<MoebooruTag>.mapToTags(serverId: Int) =
-    this.map {
-        Tag(
-            name = it.name,
-            type = parseTag(it.type),
-            serverId = serverId
-        )
-    }
-
-@JvmName("moebooruMapToTagDetail")
-fun List<MoebooruTag>.mapToTagDetail() =
-    this.firstOrNull()?.let {
         TagDetail(
             name = it.name,
             count = it.count,

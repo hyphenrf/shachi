@@ -32,7 +32,7 @@ interface PostRepository {
                     val url = action.buildGelbooruUrl(0).toString()
                     Log.d("PostPagingSource/Gelbooru", url)
                     if (booruApi.gelbooru.getPosts(url).mapToPost(action.server.toServer())
-                            .isNullOrEmpty()
+                            .isEmpty()
                     ) {
                         throw Error("list empty")
                     }
@@ -41,7 +41,7 @@ interface PostRepository {
                     val url = action.buildDanbooruUrl(1).toString()
                     Log.d("PostPagingSource/Danbooru", url)
                     if (booruApi.danbooru.getPosts(url).mapToPost(action.server.toServer())
-                            .isNullOrEmpty()
+                            .isEmpty()
                     ) {
                         throw Error("list empty")
                     }
@@ -50,7 +50,7 @@ interface PostRepository {
                     val url = action.buildMoebooruUrl(1).toString()
                     Log.d("PostPagingSource/Moebooru", url)
                     if (booruApi.moebooru.getPosts(url).mapToPost(action.server.toServer())
-                            .isNullOrEmpty()
+                            .isEmpty()
                     ) {
                         throw Error("list empty")
                     }

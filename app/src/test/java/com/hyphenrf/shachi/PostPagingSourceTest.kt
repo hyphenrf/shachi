@@ -4,11 +4,10 @@ import androidx.paging.PagingSource
 import com.hyphenrf.shachi.data.api.*
 import com.hyphenrf.shachi.data.model.ServerType
 import com.hyphenrf.shachi.data.model.ServerView
-import com.hyphenrf.shachi.data.model.response.GelbooruPost
-import com.hyphenrf.shachi.data.model.response.GelbooruPostResponse
-import com.hyphenrf.shachi.data.model.response.GelbooruPosts
+import com.hyphenrf.shachi.data.model.response.gelbooru.GelbooruPost
 import com.hyphenrf.shachi.data.model.response.mapToPost
 import com.hyphenrf.shachi.data.repository.post.PostPagingSource
+import com.hyphenrf.shachi.data.util.serializer.GelList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -56,9 +55,7 @@ class PostPagingSourceTest {
             password = null,
             blacklistedTags = null,
             selected = false)
-        val gelbooruResponse = GelbooruPostResponse(
-            GelbooruPosts(
-                post = listOf(
+        val gelbooruResponse = listOf(
                     GelbooruPost(
                         height = 900,
                         width = 1260,
@@ -84,10 +81,7 @@ class PostPagingSourceTest {
                         source = "https://twitter.com/konnyaksankaku/status/1498108188322713602",
                         hasNotes = false,
                         hasComments = false)
-                ),
-                count = 1,
-                offset = 0)
-        )
+                )
     }
 
     @Before
@@ -104,10 +98,10 @@ class PostPagingSourceTest {
 
     @Test
     fun loadReturnsPostWhenOnSuccessfulLoad() = runBlockingTest {
-        given(booruApi.gelbooru.getPosts(anyString())).willReturn(gelbooruResponse)
+        given(booruApi.gelbooru.getPosts(anyString())).willReturn(GelList(gelbooruResponse))
 
         val expectedResult = PagingSource.LoadResult.Page(
-            data = gelbooruResponse.mapToPost(server.toServer()) ?: listOf(),
+            data = gelbooruResponse.mapToPost(server.toServer()),
             prevKey = null,
             nextKey = 1
         )

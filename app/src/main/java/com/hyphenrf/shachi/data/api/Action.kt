@@ -1,6 +1,5 @@
 package com.hyphenrf.shachi.data.api
 
-import com.hyphenrf.shachi.data.model.SavedSearchServer
 import com.hyphenrf.shachi.data.model.Server
 import com.hyphenrf.shachi.data.model.ServerView
 import com.hyphenrf.shachi.data.repository.post.PostRepository.Companion.NETWORK_PAGE_SIZE
@@ -16,13 +15,14 @@ sealed class Action {
         val tags: String = "*",
         val limit: Int = NETWORK_PAGE_SIZE,
         val start: Int? = null,
-    ) :
-        Action() {
-        fun buildGelbooruUrl(page: Int): HttpUrl? {
+    ) : Action() {
+        fun buildGelbooruUrl(page: Int): HttpUrl {
             return server.let {
                 it.url.toHttpUrl().newBuilder().addPathSegment("index.php")
                     .addQueryParameter("page", "dapi")
-                    .addQueryParameter("q", "index").addQueryParameter("s", "post")
+                    .addQueryParameter("q", "index")
+                    .addQueryParameter("s", "post")
+                    .addQueryParameter("json", "1")
                     .addQueryParameter("pid", page.toString())
                     .addQueryParameter("limit", limit.toString())
                     .addQueryParameter("tags", tags)
@@ -32,7 +32,7 @@ sealed class Action {
             }
         }
 
-        fun buildMoebooruUrl(page: Int): HttpUrl? {
+        fun buildMoebooruUrl(page: Int): HttpUrl {
             return server.let {
                 it.url.toHttpUrl().newBuilder().addPathSegment("post.json")
                     .addQueryParameter("page", page.toString())
@@ -43,52 +43,12 @@ sealed class Action {
             }
         }
 
-        fun buildDanbooruUrl(page: Int): HttpUrl? {
+        fun buildDanbooruUrl(page: Int): HttpUrl {
             return server.let {
                 it.url.toHttpUrl().newBuilder().addPathSegment("posts.json")
                     .addQueryParameter("page", page.toString())
                     .addQueryParameter("limit", limit.toString())
                     .addQueryParameter("tags", tags)
-                    .addQueryParameter("api_key", it.password)
-                    .addQueryParameter("login", it.username).build()
-            }
-        }
-    }
-
-    /*
-    Search post of saved search tags
-     */
-    data class SearchSavedSearchPost(val savedSearch: SavedSearchServer) : Action() {
-        fun buildGelbooruUrl(page: Int, limit: Int = NETWORK_PAGE_SIZE): HttpUrl? {
-            return savedSearch.server.let {
-                it.url.toHttpUrl().newBuilder().addPathSegment("index.php")
-                    .addQueryParameter("page", "dapi")
-                    .addQueryParameter("q", "index").addQueryParameter("s", "post")
-                    .addQueryParameter("pid", page.toString())
-                    .addQueryParameter("limit", limit.toString())
-                    .addQueryParameter("tags", savedSearch.savedSearch.tags)
-                    .addQueryParameter("api_key", it.password)
-                    .addQueryParameter("user_id", it.username).build()
-            }
-        }
-
-        fun buildMoebooruUrl(page: Int, limit: Int = NETWORK_PAGE_SIZE): HttpUrl? {
-            return savedSearch.server.let {
-                it.url.toHttpUrl().newBuilder().addPathSegment("post.json")
-                    .addQueryParameter("page", page.toString())
-                    .addQueryParameter("limit", limit.toString())
-                    .addQueryParameter("tags", savedSearch.savedSearch.tags)
-                    .addQueryParameter("password_hash", it.password)
-                    .addQueryParameter("login", it.username).build()
-            }
-        }
-
-        fun buildDanbooruUrl(page: Int, limit: Int = NETWORK_PAGE_SIZE): HttpUrl? {
-            return savedSearch.server.let {
-                it.url.toHttpUrl().newBuilder().addPathSegment("posts.json")
-                    .addQueryParameter("page", page.toString())
-                    .addQueryParameter("limit", limit.toString())
-                    .addQueryParameter("tags", savedSearch.savedSearch.tags)
                     .addQueryParameter("api_key", it.password)
                     .addQueryParameter("login", it.username).build()
             }
@@ -105,6 +65,7 @@ sealed class Action {
                     .addQueryParameter("page", "dapi")
                     .addQueryParameter("q", "index")
                     .addQueryParameter("s", "tag")
+                    .addQueryParameter("json", "1")
                     .addQueryParameter("name_pattern", "$tag%")
                     .addQueryParameter("order", "DESC")
                     .addQueryParameter("orderby", "count")
@@ -144,7 +105,9 @@ sealed class Action {
             return server?.let {
                 it.url.toHttpUrl().newBuilder().addPathSegment("index.php")
                     .addQueryParameter("page", "dapi")
-                    .addQueryParameter("q", "index").addQueryParameter("s", "tag")
+                    .addQueryParameter("q", "index")
+                    .addQueryParameter("s", "tag")
+                    .addQueryParameter("json", "1")
                     .addQueryParameter("name", tag)
                     .addQueryParameter("api_key", it.password)
                     .addQueryParameter("user_id", it.username)
@@ -182,7 +145,9 @@ sealed class Action {
             return server?.let {
                 it.url.toHttpUrl().newBuilder().addPathSegment("index.php")
                     .addQueryParameter("page", "dapi")
-                    .addQueryParameter("q", "index").addQueryParameter("s", "tag")
+                    .addQueryParameter("q", "index")
+                    .addQueryParameter("s", "tag")
+                    .addQueryParameter("json", "1")
                     .addQueryParameter("names", tags)
                     .addQueryParameter("api_key", it.password)
                     .addQueryParameter("user_id", it.username)
@@ -215,24 +180,26 @@ sealed class Action {
     }
 
     data class GetComments(val server: Server, val postId: Int) : Action() {
-        fun buildGelbooruUrl(): HttpUrl? {
+        fun buildGelbooruUrl(): HttpUrl {
             return server.url.toHttpUrl().newBuilder().addPathSegment("index.php")
                 .addQueryParameter("page", "dapi")
-                .addQueryParameter("q", "index").addQueryParameter("s", "comment")
+                .addQueryParameter("q", "index")
+                .addQueryParameter("s", "comment")
+                .addQueryParameter("json", "1")
                 .addQueryParameter("post_id", postId.toString())
                 .addQueryParameter("api_key", server.password)
                 .addQueryParameter("user_id", server.username)
                 .build()
         }
 
-        fun buildMoebooruUrl(): HttpUrl? {
+        fun buildMoebooruUrl(): HttpUrl {
             return server.url.toHttpUrl().newBuilder().addPathSegment("comment.json")
                 .addQueryParameter("post_id", postId.toString())
                 .addQueryParameter("password_hash", server.password)
                 .addQueryParameter("login", server.username).build()
         }
 
-        fun buildDanbooruUrl(): HttpUrl? {
+        fun buildDanbooruUrl(): HttpUrl {
             return server.url.toHttpUrl().newBuilder().addPathSegment("comments.json")
                 .addQueryParameter("group_by", "comment")
                 .addEncodedQueryParameter("search[post_id]", postId.toString())

@@ -1,32 +1,12 @@
-package com.hyphenrf.shachi.data.model.response
+package com.hyphenrf.shachi.data.model.response.gelbooru
 
-import com.hyphenrf.shachi.data.util.serializer.NumberAsBooleanTypeSerializer
-import com.hyphenrf.shachi.data.util.serializer.SingleObjectAsArraySerializer
 import kotlinx.serialization.Serializable
+import nl.adaptivity.xmlutil.serialization.XmlSerialName
 
 @Serializable
-data class GelbooruTagResponse(
-    val tags: GelbooruTags? = null,
-)
-
-@Serializable
-data class GelbooruTags(
-    @Serializable(with = GelbooruTagSerializer::class)
-    val tag: List<GelbooruTag>? = null,
-    val type: String = "",
-    val count: Int? = null,
-    val offset: Int? = null,
-    val limit: Int? = null,
-)
-
-@Serializable
+@XmlSerialName("tag")
 data class GelbooruTag(
-    val id: Int = 0,
     val name: String = "",
     val count: Int = 0,
     val type: Int = 0,
-    @Serializable(NumberAsBooleanTypeSerializer::class)
-    val ambiguous: Boolean = false,
 )
-
-object GelbooruTagSerializer : SingleObjectAsArraySerializer<GelbooruTag>(GelbooruTag.serializer())

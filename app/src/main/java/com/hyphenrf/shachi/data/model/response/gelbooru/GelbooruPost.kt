@@ -1,57 +1,50 @@
-package com.hyphenrf.shachi.data.model.response
+package com.hyphenrf.shachi.data.model.response.gelbooru
 
-import com.hyphenrf.shachi.data.util.serializer.*
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
-import java.time.ZonedDateTime
+import nl.adaptivity.xmlutil.serialization.XmlSerialName
 
 @Serializable
-data class GelbooruPostResponse(
-    val posts: GelbooruPosts? = null,
-)
-
-@Serializable
-data class GelbooruPosts(
-    @Serializable(with = GelbooruPostSerializer::class)
-    val post: List<GelbooruPost>? = null,
-    val count: Int? = null,
-    val offset: Int? = null,
-    val limit: Int? = null,
-)
-
-@Serializable
+@XmlSerialName("post")
 data class GelbooruPost @OptIn(ExperimentalSerializationApi::class) constructor(
     val height: Int = 0,
     val width: Int = 0,
-    @Serializable(EmptyStringAsIntNullTypeSerializer::class) val score: Int? = null,
+    val score: SafeInt = null,
     val title: String? = null,
-    val directory: String? = null,
-    val owner: String? = null,
-    val image: String? = null,
-    @Serializable(NumberAsBooleanTypeSerializer::class) val sample: Boolean? = false,
-    @Serializable(NumberAsBooleanTypeSerializer::class) @JsonNames("post_locked") val postLocked: Boolean? = false,
-    @JsonNames("file_url") val fileUrl: String = "",
-    @Serializable(EmptyStringAsIntNullTypeSerializer::class) @JsonNames("parent_id") val parentId: Int? = null,
-    @Serializable(EmptyStringAsStringNullTypeSerializer::class) @JsonNames("sample_url") val sampleUrl: String? = null,
-    @JsonNames("sample_width") val sampleWidth: Int? = null,
-    @JsonNames("sample_height") val sampleHeight: Int? = null,
-    @Serializable(EmptyStringAsStringNullTypeSerializer::class) @JsonNames("preview_url") val previewUrl: String? = null,
-    @JsonNames("preview_width") val previewWidth: Int? = null,
-    @JsonNames("preview_height") val previewHeight: Int? = null,
+    @SerialName("file_url")
+    val fileUrl: String = "",
+    @SerialName("parent_id")
+    val parentId: SafeInt = null,
+    @SerialName("sample_url")
+    val sampleUrl: NonEmptyString = null,
+    @SerialName("sample_width")
+    val sampleWidth: Int? = null,
+    @SerialName("sample_height")
+    val sampleHeight: Int? = null,
+    @SerialName("preview_url")
+    val previewUrl: NonEmptyString = null,
+    @SerialName("preview_width")
+    val previewWidth: Int? = null,
+    @SerialName("preview_height")
+    val previewHeight: Int? = null,
     val rating: String = "",
     val tags: String = "",
-    @Serializable(SafeIntIdSerializer::class) val id: Int = 0,
+    val id: SafeInt,
     val change: Int = 0,
+    @JsonNames("hash", /* md5 also attempted */)
     val md5: String = "",
-    @JsonNames("creator_id") val creatorId: Int? = null,
-    @JsonNames("has_children") val hasChildren: Boolean = false,
-    @Serializable(ZonedDateTimeSerializer::class) @JsonNames("created_at") val createdAt: ZonedDateTime? = null,
+    @SerialName("creator_id")
+    val creatorId: Int? = null,
+    @SerialName("has_children")
+    val hasChildren: Boolean = false,
+    @SerialName("created_at")
+    val createdAt: TimeStampWithZone = null,
     val status: String = "",
     val source: String = "",
-    @JsonNames("has_notes") val hasNotes: Boolean = false,
-    @JsonNames("has_comments") val hasComments: Boolean = false,
+    @SerialName("has_notes")
+    val hasNotes: Boolean = false,
+    @SerialName("has_comments")
+    val hasComments: Boolean = false,
 )
-
-object GelbooruPostSerializer :
-    SingleObjectAsArraySerializer<GelbooruPost>(GelbooruPost.serializer())

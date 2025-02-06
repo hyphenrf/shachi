@@ -10,22 +10,22 @@ import com.hyphenrf.shachi.data.api.BooruApi
 interface CommentRepository {
     val booruApi: BooruApi
 
-    suspend fun getComments(action: Action.GetComments): List<Comment>? =
+    suspend fun getComments(action: Action.GetComments): List<Comment> =
         when (action.server.type) {
             ServerType.Gelbooru -> {
-                action.buildGelbooruUrl()?.toString()?.let {
+                action.buildGelbooruUrl().toString().let {
                     Log.d("CommentRepository/Gelbooru", it)
                     booruApi.gelbooru.getComments(it).mapToComments()
                 }
             }
             ServerType.Moebooru -> {
-                action.buildMoebooruUrl()?.toString()?.let {
+                action.buildMoebooruUrl().toString().let {
                     Log.d("CommentRepository/Moebooru", it)
                     booruApi.moebooru.getComments(it).mapToComments()
                 }
             }
             ServerType.Danbooru -> {
-                action.buildDanbooruUrl()?.toString()?.let {
+                action.buildDanbooruUrl().toString().let {
                     Log.d("CommentRepository/Danbooru", it)
                     booruApi.danbooru.getComments(it).mapToComments()
                 }
