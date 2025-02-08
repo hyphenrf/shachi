@@ -1,5 +1,9 @@
 ### ⚠️ IMPORTANT ⚠️ — @hyphenrf (Hi o/)
 
+<img align="right" width="136" height="68" title="License Logo"
+  src="https://www.gnu.org/graphics/gplv3-with-text-136x68.png"
+  alt="A red logo that reads 'GPLv3 Free Software' with a subtitle that reads 'Free as in Freedom'">
+
 This project did **NOT** start as original work of mine. It is forked from a now deleted
 [repository](https://github.com/faldez/shachi).
 

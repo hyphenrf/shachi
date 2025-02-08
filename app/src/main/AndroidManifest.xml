@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28"
+        android:maxSdkVersion="33"
         tools:ignore="ScopedStorage" />
 
     <application
@@ -37,9 +37,6 @@
         <service android:name=".service.DownloadService" />
         <service android:name=".service.BackupService" />
         <service android:name=".service.RestoreService" />
-        <meta-data
-            android:name="firebase_crashlytics_collection_enabled"
-            android:value="false" />
     </application>
 
 </manifest>
