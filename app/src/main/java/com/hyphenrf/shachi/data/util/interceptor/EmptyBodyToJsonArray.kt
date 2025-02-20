@@ -8,9 +8,11 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 object EmptyBodyToJsonArray : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
-        val body = response.body!!
 
-        if (body.contentLength() != 0L) return response
+        // body.contentLength sometimes returns -1 if unknown
+        // Note: this check won't protect from a body that is whitespace or malformed json
+        if (response.peekBody(1).source().use { it.request(1) })
+            return response
 
         return response.newBuilder()
             .body("[]".toResponseBody("application/json".toMediaType()))
