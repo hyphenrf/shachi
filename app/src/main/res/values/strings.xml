@@ -27,6 +27,8 @@
     <string name="posted">Posted</string>
     <string name="rating">Rating</string>
     <string name="score">Score</string>
+    <string name="md5">MD5</string>
+    <string name="copied">Copied to clipboard</string>
     <string name="save">Save</string>
     <string name="host">Host</string>
     <string name="search">Search</string>

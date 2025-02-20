@@ -90,6 +90,19 @@
                 android:layout_marginBottom="8dp" />
 
             <TextView
+                style="@style/TextAppearance.Material3.LabelLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/md5" />
+
+            <TextView
+                android:id="@+id/md5_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
                 android:id="@+id/tags_label"
                 style="@style/TextAppearance.Material3.LabelLarge"
                 android:layout_width="match_parent"

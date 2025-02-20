@@ -1,11 +1,16 @@
 package com.hyphenrf.shachi.ui.post_detail
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
@@ -43,6 +48,7 @@ class PostDetailFragment : DialogFragment() {
     lateinit var binding: PostDetailFragmentBinding
     private lateinit var tagDetailsBinding: TagsDetailsBinding
     private val viewModel: PostDetailViewModel by viewModels {
+        @Suppress("DEPRECATION") // getParcelable(key, class) requires API 33 at minimum
         val post = requireArguments().get("post") as Post
         val currentSearchTags = requireArguments().getString("tags", null) ?: ""
         val db = AppDatabase.build(requireContext())
@@ -62,7 +68,7 @@ class PostDetailFragment : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = PostDetailFragmentBinding.inflate(inflater, container, false)
         tagDetailsBinding = TagsDetailsBinding.bind(binding.root)
         binding.bind()
@@ -119,10 +125,23 @@ class PostDetailFragment : DialogFragment() {
 
     private fun PostDetailFragmentBinding.bind() {
         viewModel.post.let { p ->
+            // text views below are defined as snake_case in res/layout/post_detail_fragment.xml
             sourceUrl.text = p.source
             ratingTextview.text = p.rating.toString()
             scoreTextview.text = "${p.score ?: 0}"
             postedTextview.text = p.createdAt
+            md5Textview.text = p.md5
+            md5Textview.setOnLongClickListener { view ->
+                // Copy text content to clipboard (can use p.md5 from env, but worse for inliner)
+                view.context
+                    .getSystemService(ClipboardManager::class.java)
+                    .setPrimaryClip(ClipData.newPlainText("MD5", (view as TextView).text))
+                // Give user feedback that we copied text (default behavior in Android 13+)
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU)
+                    Toast.makeText(view.context, R.string.copied, Toast.LENGTH_SHORT).show()
+                // Consume the click, don't propagate it to parent's handler
+                true
+            }
         }
 
         if (!isTablet) {
