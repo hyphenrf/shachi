@@ -39,8 +39,11 @@ class FavoriteAdapter(
         val imageView = holder.binding.imageView
 
         if (post != null) {
-            holder.binding.movieTypeIcon.isVisible =
-                MimeUtil.getMimeTypeFromUrl(post.fileUrl)?.startsWith("video") ?: false
+            val (type, subtype) = (MimeUtil.getMimeTypeFromUrl(post.fileUrl) ?: "/").split('/')
+            when {
+                type == "video" -> holder.binding.movieTypeIcon.isVisible = true
+                subtype == "gif" -> holder.binding.gifTypeIcon.isVisible = true
+            }
             holder.binding.root.setOnClickListener { _ ->
                 onClick(position)
             }

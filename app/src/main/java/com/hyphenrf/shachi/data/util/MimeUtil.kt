@@ -2,11 +2,11 @@ package com.hyphenrf.shachi.data.util
 
 import android.webkit.MimeTypeMap
 
-class MimeUtil {
-    companion object {
-        fun getMimeTypeFromUrl(url: String): String? {
-            val extension = MimeTypeMap.getFileExtensionFromUrl(url)
-            return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension)
-        }
+object MimeUtil {
+    private val map = MimeTypeMap.getSingleton()
+
+    fun getMimeTypeFromUrl(url: String): String? {
+        val extension = MimeTypeMap.getFileExtensionFromUrl(url)
+        return map.getMimeTypeFromExtension(extension)
     }
 }

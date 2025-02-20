@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:contentDescription="@string/post_thumbnail_description"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +38,18 @@
             android:layout_height="24dp"
             android:background="@color/loadingCardBackgroundColor"
             android:src="@drawable/ic_baseline_local_movies_24"
+            android:tint="@color/loadingCardColor"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:shapeAppearance="@style/ShapeAppearanceImageRounded" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/gif_type_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/loadingCardBackgroundColor"
+            android:src="@drawable/ic_baseline_local_gif_24"
             android:tint="@color/loadingCardColor"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"

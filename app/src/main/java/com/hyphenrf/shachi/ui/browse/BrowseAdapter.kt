@@ -72,9 +72,12 @@ class BrowseItemViewHolder(
         val imageView = binding.imageView
 
         if (post != null) {
-            binding.favoriteIcon.isVisible = post.favorite
-            binding.movieTypeIcon.isVisible =
-                MimeUtil.getMimeTypeFromUrl(post.fileUrl)?.startsWith("video") ?: false
+            if (post.favorite) binding.favoriteIcon.isVisible = true
+            val (type, subtype) = (MimeUtil.getMimeTypeFromUrl(post.fileUrl) ?: "/").split('/')
+            when {
+                type == "video" -> binding.movieTypeIcon.isVisible = true
+                subtype == "gif" -> binding.gifTypeIcon.isVisible = true
+            }
             binding.root.setOnClickListener { _ ->
                 onClick(bindingAdapterPosition)
             }

@@ -5,7 +5,6 @@ import android.util.Log
 import android.util.SparseArray
 import android.view.*
 import androidx.core.util.forEach
-import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -238,14 +237,16 @@ class SavedSearchPostAdapter(
             imageView.layoutParams = imageLayoutParams
 
             if (item != null) {
-                if (item.favorite)
-                    binding.favoriteIcon.isVisible = true
-                else
-                    binding.favoriteIcon.isGone = true
-                if (MimeUtil.getMimeTypeFromUrl(item.fileUrl)?.startsWith("video") == true)
-                    binding.movieTypeIcon.isVisible = true
-                else
-                    binding.movieTypeIcon.isGone = true
+                // setting isGone necessary?? No but it's an optimization (see: b7325a8)
+                // TODO:
+                //  investigate what exactly this optimizes???
+                //  investigate whether spurious setting of those variables is worse for perf
+                if (item.favorite) binding.favoriteIcon.isVisible = true
+                val (type, subtype) = (MimeUtil.getMimeTypeFromUrl(item.fileUrl) ?: "/").split('/')
+                when {
+                    type == "video" -> binding.movieTypeIcon.isVisible = true
+                    subtype == "gif" -> binding.gifTypeIcon.isVisible = true
+                }
                 binding.root.setOnClickListener {
                     listener.onClick(savedSearchServer, bindingAdapterPosition)
                 }
