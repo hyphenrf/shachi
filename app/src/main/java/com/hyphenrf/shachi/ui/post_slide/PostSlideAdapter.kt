@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.core.view.doOnDetach
 import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -94,6 +95,8 @@ class PostSlideAdapter(
         }
     }
 
+    // TODO: this doesn't always get called. e.g. it doesn't get called when navigating <back> from
+    //   a post slide. This probably isn't the right place to clean up exoplayer.
     override fun onViewDetachedFromWindow(holder: PostSlideViewHolder) {
         super.onViewDetachedFromWindow(holder)
         if (holder is PostSlideVideoViewHolder) {
@@ -230,6 +233,13 @@ class PostSlideVideoViewHolder(
         binding.videoPlayerView.setOnClickListener {
             onTap()
         }
+        // HACK: read up on activity lifecycles (specifically onStop, onPause, onDestroy) to better
+        //   understand where to put this cleanup code for optimal memory & bandwidth use.
+        //   For now, this works.
+        binding.videoPlayerView.doOnDetach {
+            pausePlayer()
+            releasePlayer()
+        }
         val volumeToggle = binding.videoPlayerView.findViewById<ImageButton>(R.id.volume_toggle)
         volumeToggle.setOnClickListener {
             Log.d("PostSlideVideoViewHolder", "volume toggled")
@@ -261,8 +271,8 @@ class PostSlideVideoViewHolder(
 
     fun releasePlayer() {
         player.playWhenReady = false
-        player.release()
         player.stop()
+        player.release()
         player.clearMediaItems()
     }
 }
